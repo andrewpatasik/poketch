@@ -23,7 +23,7 @@ function PokemonListLayout(props) {
                     <div className="grid grid-3-col">
                         {
                         props.pokemonData.map((pokemon, index) => {
-                            return <Link to={`/pokedex/${pokemon}`} key={index}><PokemonCard detail={pokemon} /></Link>
+                            return <Link to={`/mypokemon/${index}`} key={index}><PokemonCard detail={pokemon} /></Link>
                         })
                         }
                     </div>              
