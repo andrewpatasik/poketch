@@ -9,3 +9,26 @@ body {
     background-color: whitesmoke;
     color: rgba(0, 0, 0, 75%);
 }
+
+nav > ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.grid {
+    display: grid;
+}
+
+.grid-3-col {
+    grid-template-columns: repeat(3, auto);
+}
+
+.grid-item {
+    text-align: center;
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+}
