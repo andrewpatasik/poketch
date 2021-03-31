@@ -29,7 +29,8 @@ function App() {
                     let details = Promise.resolve(requestPokemon(pokemon.url))
                     details
                         .then(function onfulfilled(data) {
-                            list.push(data);
+                            let {id, name, moves, types, sprites} = data;
+                            list.push({id: id, name: name, moves: moves, types: types, image: sprites.front_default});
                         })
                 })
                     setTimeout(() => {
@@ -47,8 +48,8 @@ function App() {
         let values;
         pokemonList.map(pokemon => {
             if (pokemon.id.toString() === index) {
-                let { id, name, moves, types } = pokemon;
-                setMyPokemonList([...myPokemonList, {id: id, name: name, index: index}])
+                let { id, name, moves, types, image } = pokemon;
+                setMyPokemonList([...myPokemonList, {id: id, name: name, moves: moves, types: types, image: image}])
                 // console.log(id, name, types[0].type.name)
                 // console.log(myPokemonList)
             }

@@ -22,7 +22,31 @@ function PokemonInfo(props) {
                         props.pokemonData.map(pokemon => {
                             let id = pokemon.id.toString();
                             if (index === id) {
-                                return <h1 key={id}>{pokemon.name}</h1>
+                                function getDetailOfMoveAndTypes(categoryIndex, category, length) {
+                                    let statList = []
+                                    for (let index = 0; index < length; index++) {
+                                        statList.push(pokemon[categoryIndex][index][category].name);
+                                        // console.log(pokemon[categoryIndex][index][category].name);
+                                    }
+
+                                    return statList;
+                                }
+
+                                let moves = getDetailOfMoveAndTypes('moves', 'move', 3);
+                                let types = getDetailOfMoveAndTypes('types', 'type', pokemon.types.length);
+                                
+                                return (
+                                    <div key={id}>
+                                        <img src={pokemon.image} />
+                                        <h1>{pokemon.name}</h1>
+                                        <ul>
+                                            {moves.map((move, index) => <li key={index}>{move}</li>)}
+                                        </ul>
+                                        <ul>
+                                            {types.map((type, index) => <li key={index}>{type}</li>)}
+                                        </ul>
+                                    </div>
+                                )
                             }
                         })
                     } 
@@ -34,10 +58,29 @@ function PokemonInfo(props) {
                     {
                         props.pokemonData.map((pokemon, i) => {
                             if (index === i.toString()) {
+                                function getDetailOfMoveAndTypes(categoryIndex, category, length) {
+                                    let statList = []
+                                    for (let index = 0; index < length; index++) {
+                                        statList.push(pokemon[categoryIndex][index][category].name);
+                                        // console.log(pokemon[categoryIndex][index][category].name);
+                                    }
+
+                                    return statList;
+                                }
+
+                                let moves = getDetailOfMoveAndTypes('moves', 'move', 3);
+                                let types = getDetailOfMoveAndTypes('types', 'type', pokemon.types.length);
+                                
                                 return (
                                     <div key={i}>
+                                        <img src={pokemon.image} />
                                         <h1>{pokemon.name}</h1>
-                                        <h1>{pokemon.id}</h1>
+                                        <ul>
+                                            {moves.map((move, index) => <li key={index}>{move}</li>)}
+                                        </ul>
+                                        <ul>
+                                            {types.map((type, index) => <li key={index}>{type}</li>)}
+                                        </ul>
                                     </div>
                                 )
                             }
