@@ -1,10 +1,11 @@
 import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
 import PokemonCard from './PokemonCard';
 
 function PokemonListLayout(props) {
-
+    // console.log(props.pokemonData)
+    
     return (
         <section>
             <Switch>
@@ -13,7 +14,7 @@ function PokemonListLayout(props) {
                     <div className="grid grid-3-col">
                         {
                         props.pokemonData.map((pokemon, index) => {
-                            return <Link to={`/pokedex/${pokemon}`} key={index}><PokemonCard detail={pokemon} /></Link>
+                            return <Link to={`/pokedex/${pokemon.id}`} key={index}><PokemonCard detail={pokemon.name} /></Link>
                         })
                         }
                     </div>                    
@@ -23,7 +24,7 @@ function PokemonListLayout(props) {
                     <div className="grid grid-3-col">
                         {
                         props.pokemonData.map((pokemon, index) => {
-                            return <Link to={`/mypokemon/${index}`} key={index}><PokemonCard detail={pokemon} /></Link>
+                            return <Link to={`/mypokemon/${index}`} key={index}><PokemonCard detail={pokemon.name} /></Link>
                         })
                         }
                     </div>              

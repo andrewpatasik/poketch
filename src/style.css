@@ -28,7 +28,7 @@ nav > ul {
 .grid-item {
     text-align: center;
     border: 1px solid black;
-    width: 30px;
+    width: fit-content;
     height: 30px;
-    margin: 0 auto;
+    margin: 8px auto;
 }

@@ -1,14 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Nav from './Nav';
 import PokemonListLayout from './PokemonListLayout';
 import PokemonInfo from './PokemonInfo';
 
 function App() {
-     const [myPokemonList, setMyPokemonList] = useState([]);
+    const [pokemonList, setPokemonList] = useState([]);
+    const [myPokemonList, setMyPokemonList] = useState([]);
+
+    useEffect(() => {
+        async function requestPokemon(url) {
+            const request = await fetch(url);
+            const response = await request.json();
+    
+            return response;
+        }
+
+        async function generatePokemon() {
+            const request = await requestPokemon('https://pokeapi.co/api/v2/pokemon/?limit=3&offset=0')
+            const pokemonDetail = await getPokemonInfo(request.results)
+            setPokemonList(pokemonDetail);
+        }
+    
+        function getPokemonInfo(array) {
+            let list = [];
+            let pokemonData = new Promise((resolve, reject) => {
+                array.forEach(pokemon => {
+                    let details = Promise.resolve(requestPokemon(pokemon.url))
+                    details
+                        .then(function onfulfilled(data) {
+                            list.push(data);
+                        })
+                })
+                    setTimeout(() => {
+                        resolve(list)
+                        // console.log(list)
+                    }, 1000)
+            })
+            return pokemonData;
+        }
+
+        generatePokemon()
+    }, [])
 
     function handleAdd(index) {
-        setMyPokemonList([...myPokemonList, index])
+        let values;
+        pokemonList.map(pokemon => {
+            if (pokemon.id.toString() === index) {
+                let { id, name, moves, types } = pokemon;
+                setMyPokemonList([...myPokemonList, {id: id, name: name, index: index}])
+                // console.log(id, name, types[0].type.name)
+                // console.log(myPokemonList)
+            }
+        })
         
     }
 
@@ -23,19 +67,19 @@ function App() {
             <Nav />
             <Switch>
                 <Route exact path="/">
-                    <PokemonListLayout pokemonData={[1,2,3]}/>               
+                    <PokemonListLayout pokemonData={pokemonList}/>               
                 </Route>
                 <Route exact path="/mypokemon">
                     <PokemonListLayout pokemonData={myPokemonList} />               
                 </Route>
-                <Route path="/mypokemon/:index">
-                    <PokemonInfo handleRemove={handleRemove}/>               
-                </Route>
-                <Route path="/pokedex/:index">
-                    <PokemonInfo handleAdd={handleAdd}/>               
-                </Route>
                 <Route exact path="/pokedex/">
                     <Redirect to="/"/>              
+                </Route>
+                <Route path="/mypokemon/:index">
+                    <PokemonInfo pokemonData={myPokemonList} handleRemove={handleRemove}/>               
+                </Route>
+                <Route path="/pokedex/:index">
+                    <PokemonInfo pokemonData={pokemonList} handleAdd={handleAdd}/>               
                 </Route>
             </Switch>
         </Router>
