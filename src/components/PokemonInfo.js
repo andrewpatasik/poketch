@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
+import Modal from './Modal';
 
 function PokemonInfo(props) {
     const { index } = useParams();
     
-    function add() {
-        props.handleAdd(index);
+    const [showModal, setShowModal] = useState(false);
+
+    function catchPokemon() {
+        let caughtScore = Math.floor(Math.random() * 9);
+        if (caughtScore >= 5) {
+            // alert(`nice! your caught score is high (${caughtScore})`)
+            return setShowModal(true);
+        }
+        alert(`Oh no! pokemon is fleed`)
+        return false;
+        // props.handleAdd(index);
     }
 
-    function remove() {
-        props.handleRemove(index);
+    function releasePokemon() {
+        props.handleRelease(index);
     }
 
     return (
@@ -50,7 +60,8 @@ function PokemonInfo(props) {
                             }
                         })
                     } 
-                    {props.handleAdd === undefined ? null : <Link to="/"><button onClick={add}>Add</button></Link>}
+                    { showModal ? <Modal pokeIndex={index} handleAdd={props.handleAdd} modalProps={setShowModal} pokemonData={props.myPokemonData}/> : null}
+                    {props.handleAdd === undefined ? null : <button onClick={catchPokemon}>Catch</button>}
                 </div>
             </Route>
             <Route exact path="/mypokemon/:index">
@@ -74,7 +85,8 @@ function PokemonInfo(props) {
                                 return (
                                     <div key={i}>
                                         <img src={pokemon.image} />
-                                        <h1>{pokemon.name}</h1>
+                                        <h1>{pokemon.nickname}</h1>
+                                        <h3>{pokemon.name}</h3>
                                         <ul>
                                             {moves.map((move, index) => <li key={index}>{move}</li>)}
                                         </ul>
@@ -86,7 +98,7 @@ function PokemonInfo(props) {
                             }
                         })
                     } 
-                    {props.handleRemove === undefined ? null : <Link to="/mypokemon/"><button onClick={remove}>Remove</button></Link>}
+                    {props.handleRelease === undefined ? null : <Link to="/mypokemon/"><button onClick={releasePokemon}>Release</button></Link>}
                 </div>
             </Route>
         </Switch>
