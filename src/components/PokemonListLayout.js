@@ -14,7 +14,7 @@ function PokemonListLayout(props) {
                         <div className="grid grid-3-col">
                             {
                             props.pokemonData.map((pokemon, index) => {
-                                return <Link className="card-link" to={`/pokedex/${pokemon.id}`} key={index}><PokemonCard detail={pokemon.name} /></Link>
+                                return <Link className="card-link" to={`/pokedex/${pokemon.id}`} key={index}><PokemonCard name={pokemon.name} id={pokemon.id} myPokemonCounter={props.myPokemonCounter} /></Link>
                             })
                             }
                         </div>                    
@@ -26,7 +26,7 @@ function PokemonListLayout(props) {
                     <div className="my-pokemon-list grid grid-3-col scrollable">
                         {
                         props.pokemonData.map((pokemon, index) => {
-                            return <Link className="card-link" to={`/mypokemon/${index}`} key={index}><PokemonCard detail={pokemon.nickname} /></Link>
+                            return <Link className="card-link" to={`/mypokemon/${index}`} key={index}><PokemonCard name={pokemon.nickname} myPokemonCounter={props.myPokemonCounter}/></Link>
                         })
                         }
                     </div>              

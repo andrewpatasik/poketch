@@ -7,6 +7,7 @@ import PokemonInfo from './PokemonInfo';
 function App() {
     const [pokemonList, setPokemonList] = useState([]);
     const [myPokemonList, setMyPokemonList] = useState([]);
+    const [myPokemonCounter, setMyPokemonCounter] = useState([]);
 
     useEffect(() => {
         async function requestPokemon(url) {
@@ -61,6 +62,7 @@ function App() {
             if (pokemon.id.toString() === index) {
                 let { id, name, moves, types, image } = pokemon;
                 setMyPokemonList([...myPokemonList, {id: id, name: name, nickname: nickname, moves: moves, types: types, image: image}])
+                setMyPokemonCounter([...myPokemonCounter, index])
                 // console.log(id, name, types[0].type.name)
                 // console.log(myPokemonList)
             }
@@ -69,9 +71,14 @@ function App() {
     }
 
     function handleRelease(index) {
-        let values = [...myPokemonList]
-        values.splice(index, 1);
-        setMyPokemonList(values);
+        let myPokemonListValue = [...myPokemonList]
+        let myPokemonCounterValue = [...myPokemonCounter]
+        
+        myPokemonListValue.splice(index, 1);
+        setMyPokemonList(myPokemonListValue);
+
+        myPokemonCounterValue.splice(index, 1);
+        setMyPokemonCounter(myPokemonCounterValue);
     }
 
     return ( 
@@ -80,10 +87,10 @@ function App() {
                 <Nav />
                 <Switch>
                     <Route exact path="/">
-                        <PokemonListLayout pokemonData={pokemonList}/>               
+                        <PokemonListLayout pokemonData={pokemonList} myPokemonCounter={myPokemonCounter} />               
                     </Route>
                     <Route exact path="/mypokemon">
-                        <PokemonListLayout pokemonData={myPokemonList} />               
+                        <PokemonListLayout pokemonData={myPokemonList} myPokemonCounter={myPokemonCounter} />               
                     </Route>
                     <Route exact path="/pokedex/">
                         <Redirect to="/"/>              
