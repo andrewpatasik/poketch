@@ -10,21 +10,23 @@ function PokemonListLayout(props) {
         <section>
             <Switch>
                 <Route exact path="/">
-                    <h1>choose a pokemon to catch</h1>
-                    <div className="grid grid-3-col">
-                        {
-                        props.pokemonData.map((pokemon, index) => {
-                            return <Link to={`/pokedex/${pokemon.id}`} key={index}><PokemonCard detail={pokemon.name} /></Link>
-                        })
-                        }
-                    </div>                    
+                    <div className="pokemon-list">
+                        <div className="grid grid-3-col">
+                            {
+                            props.pokemonData.map((pokemon, index) => {
+                                return <Link className="card-link" to={`/pokedex/${pokemon.id}`} key={index}><PokemonCard detail={pokemon.name} /></Link>
+                            })
+                            }
+                        </div>                    
+                        <p>choose a pokemon to catch</p>
+                        <button className="btn shuffle-btn">Shuffle</button>
+                    </div>
                 </Route>
                 <Route path="/mypokemon">
-                    <h1>My Pokemon</h1>  
-                    <div className="grid grid-3-col">
+                    <div className="my-pokemon-list grid grid-3-col scrollable">
                         {
                         props.pokemonData.map((pokemon, index) => {
-                            return <Link to={`/mypokemon/${index}`} key={index}><PokemonCard detail={pokemon.name} /></Link>
+                            return <Link className="card-link" to={`/mypokemon/${index}`} key={index}><PokemonCard detail={pokemon.nickname} /></Link>
                         })
                         }
                     </div>              

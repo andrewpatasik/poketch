@@ -44,6 +44,17 @@ function App() {
         generatePokemon()
     }, [])
 
+    useEffect(() => {
+        const data = localStorage.getItem('my-pokemon-list');
+        if (data) {
+            setMyPokemonList(JSON.parse(data))
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("my-pokemon-list", JSON.stringify(myPokemonList))
+    })
+
     function handleAdd(index, nickname) {
         // console.log(nickname)
         pokemonList.map(pokemon => {
@@ -64,26 +75,28 @@ function App() {
     }
 
     return ( 
-        <Router>
-            <Nav />
-            <Switch>
-                <Route exact path="/">
-                    <PokemonListLayout pokemonData={pokemonList}/>               
-                </Route>
-                <Route exact path="/mypokemon">
-                    <PokemonListLayout pokemonData={myPokemonList} />               
-                </Route>
-                <Route exact path="/pokedex/">
-                    <Redirect to="/"/>              
-                </Route>
-                <Route path="/mypokemon/:index">
-                    <PokemonInfo pokemonData={myPokemonList} handleRelease={handleRelease}/>               
-                </Route>
-                <Route path="/pokedex/:index">
-                    <PokemonInfo pokemonData={pokemonList} myPokemonData={myPokemonList} handleAdd={handleAdd}/>               
-                </Route>
-            </Switch>
-        </Router>
+        <div className="main">
+            <Router>
+                <Nav />
+                <Switch>
+                    <Route exact path="/">
+                        <PokemonListLayout pokemonData={pokemonList}/>               
+                    </Route>
+                    <Route exact path="/mypokemon">
+                        <PokemonListLayout pokemonData={myPokemonList} />               
+                    </Route>
+                    <Route exact path="/pokedex/">
+                        <Redirect to="/"/>              
+                    </Route>
+                    <Route path="/mypokemon/:index">
+                        <PokemonInfo pokemonData={myPokemonList} handleRelease={handleRelease}/>               
+                    </Route>
+                    <Route path="/pokedex/:index">
+                        <PokemonInfo pokemonData={pokemonList} myPokemonData={myPokemonList} handleAdd={handleAdd}/>               
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
         );
 }
  

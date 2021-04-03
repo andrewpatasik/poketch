@@ -7,14 +7,16 @@ function PokemonInfo(props) {
     const { index } = useParams();
     
     const [showModal, setShowModal] = useState(false);
+    const [isPokemonFlee, setIsPokemonFlee] = useState(false);
 
     function catchPokemon() {
         let caughtScore = Math.floor(Math.random() * 9);
         if (caughtScore >= 5) {
-            // alert(`nice! your caught score is high (${caughtScore})`)
             return setShowModal(true);
         }
-        alert(`Oh no! pokemon is fleed`)
+        setIsPokemonFlee(true);
+        setTimeout(()=> setIsPokemonFlee(false), 1000)
+        
         return false;
         // props.handleAdd(index);
     }
@@ -24,11 +26,11 @@ function PokemonInfo(props) {
     }
 
     return (
-        <section>
         <Switch>
             <Route exact path="/pokedex/:index">
-                <div>
-                    {
+                <section>
+                { showModal ? <div className="back-drop"></div> : null}
+                {
                         props.pokemonData.map(pokemon => {
                             let id = pokemon.id.toString();
                             if (index === id) {
@@ -46,26 +48,34 @@ function PokemonInfo(props) {
                                 let types = getDetailOfMoveAndTypes('types', 'type', pokemon.types.length);
                                 
                                 return (
-                                    <div key={id}>
-                                        <img src={pokemon.image} />
-                                        <h1>{pokemon.name}</h1>
-                                        <ul>
-                                            {moves.map((move, index) => <li key={index}>{move}</li>)}
-                                        </ul>
-                                        <ul>
-                                            {types.map((type, index) => <li key={index}>{type}</li>)}
-                                        </ul>
+                                    <div className="pokemon-info" key={id}>
+                                        <div className="above-section flex">
+                                           <div>
+                                            <img src={pokemon.image} />
+                                                <h1>{pokemon.name}</h1>
+                                                <ul className="pokemon-types flex">
+                                                    {types.map((type, index) => <li key={index}>{type}</li>)}
+                                                </ul>
+                                           </div>
+                                        </div>
+                                        <div className="below-section flex">
+                                            <h3>Moves:</h3>
+                                            <ul className="pokemon-moves">
+                                                {moves.map((move, index) => <li key={index}>{move}</li>)}
+                                            </ul>
+                                        </div>
+                                        {isPokemonFlee ? <div className="pokemon-fleed flex centered"><h1>Oh no! Pokemon is fleed</h1></div> : null}
+                                        {props.handleAdd === undefined ? null : <button className="btn catch-btn" onClick={catchPokemon}>Catch</button>}
                                     </div>
                                 )
                             }
                         })
                     } 
-                    { showModal ? <Modal pokeIndex={index} handleAdd={props.handleAdd} modalProps={setShowModal} pokemonData={props.myPokemonData}/> : null}
-                    {props.handleAdd === undefined ? null : <button onClick={catchPokemon}>Catch</button>}
-                </div>
+                { showModal ? <Modal pokeIndex={index} handleAdd={props.handleAdd} modalProps={setShowModal} pokemonData={props.myPokemonData}/> : null}
+                </section>
             </Route>
             <Route exact path="/mypokemon/:index">
-                <div>
+                <section>
                     {
                         props.pokemonData.map((pokemon, i) => {
                             if (index === i.toString()) {
@@ -83,26 +93,33 @@ function PokemonInfo(props) {
                                 let types = getDetailOfMoveAndTypes('types', 'type', pokemon.types.length);
                                 
                                 return (
-                                    <div key={i}>
-                                        <img src={pokemon.image} />
-                                        <h1>{pokemon.nickname}</h1>
-                                        <h3>{pokemon.name}</h3>
-                                        <ul>
+                                    <div className="pokemon-info" key={i}>
+                                        <div className="above-section flex">
+                                            <div>
+                                                <img src={pokemon.image} />
+                                                <h1>{pokemon.nickname}</h1>
+                                                <h3>{pokemon.name}</h3>
+                                                <ul className="pokemon-types flex">
+                                                    {types.map((type, index) => <li key={index}>{type}</li>)}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className="below-section flex">
+                                        <h3>Moves:</h3>
+                                        <ul className="pokemon-moves">
                                             {moves.map((move, index) => <li key={index}>{move}</li>)}
                                         </ul>
-                                        <ul>
-                                            {types.map((type, index) => <li key={index}>{type}</li>)}
-                                        </ul>
+                                        </div>
+                                        {props.handleRelease === undefined ? null : <Link to="/mypokemon/"><button className="btn release-btn" onClick={releasePokemon}>Release</button></Link>}
                                     </div>
                                 )
                             }
                         })
                     } 
-                    {props.handleRelease === undefined ? null : <Link to="/mypokemon/"><button onClick={releasePokemon}>Release</button></Link>}
-                </div>
+                    
+                </section>
             </Route>
-        </Switch>
-    </section>        
+        </Switch>    
     )
 }
 
