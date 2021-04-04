@@ -27,7 +27,7 @@ function PokemonListLayout({pokemonData, myPokemonCounter, handleGenerateRandomP
                         <button onClick={generateRandomPokemon} className="btn shuffle-btn">Shuffle</button>
                     </div>
                 </Route>
-                <Route path="/mypokemon">
+                <Route path="/poketch/mypokemon">
                     <div className="my-pokemon-list grid grid-3-col scrollable">
                         {
                         pokemonData.length !== 0 ? pokemonData.map((pokemon, index) => {

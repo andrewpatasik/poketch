@@ -24,7 +24,7 @@ function PokemonCard({name, id, myPokemonCounter}) {
                     <h3>Owned: {ownedPokemon[id]}</h3>
                 </div>
             </Route>            
-            <Route path="/mypokemon">
+            <Route path="/poketch/mypokemon">
                 <div className="grid-item flex">
                     <h1 className="card-headline">{name}</h1>
                 </div>

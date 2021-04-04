@@ -26,7 +26,7 @@ function PokemonInfo({pokemonData, myPokemonData, handleAdd, handleRelease }) {
 
     return (
         <Switch>
-            <Route exact path="/pokedex/:index">
+            <Route exact path="/poketch/pokedex/:index">
                 <section>
                 { showModal ? <div className="back-drop"></div> : null}
                 {
@@ -77,7 +77,7 @@ function PokemonInfo({pokemonData, myPokemonData, handleAdd, handleRelease }) {
                 { showModal ? <Modal pokeIndex={index} handleAdd={handleAdd} modalProps={setShowModal} pokemonData={myPokemonData}/> : null}
                 </section>
             </Route>
-            <Route exact path="/mypokemon/:index">
+            <Route exact path="/poketch/mypokemon/:index">
                 <section>
                     {
                         pokemonData.map((pokemon, i) => {
