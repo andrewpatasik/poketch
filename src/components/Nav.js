@@ -6,7 +6,7 @@ function Nav() {
     return (
         <nav>
             <ul>
-                <li><Link className="nav-link" to="/">Catch Pokemon</Link></li>
+                <li><Link className="nav-link" to="/poketch/">Catch Pokemon</Link></li>
                 <li><h1 className="logo">Poketch</h1></li>
                 <li><Link className="nav-link" to="/mypokemon">My Pokemon</Link></li>
             </ul>
