@@ -84,6 +84,11 @@ function PokemonInfo({pokemonData, myPokemonData, handleAdd, handleRelease }) {
                             if (index === i.toString()) {
                                 function getDetailOfMoveAndTypes(categoryIndex, category, length) {
                                     let statList = []
+
+                                    if (pokemon[categoryIndex].length === 0) {
+                                        return null;
+                                    }
+
                                     for (let index = 0; index < length; index++) {
                                         statList.push(pokemon[categoryIndex][index][category].name);
                                     }
@@ -109,7 +114,7 @@ function PokemonInfo({pokemonData, myPokemonData, handleAdd, handleRelease }) {
                                         <div className="below-section flex">
                                         <h3 className="pokemon-moves-headline">Moves:</h3>
                                         <ul className="pokemon-moves">
-                                            {moves.map((move, index) => <li key={index}>{move}</li>)}
+                                            {moves !== null ? moves.map((move, index) => <li key={index}>{move}</li>) : "Moves not found"}
                                         </ul>
                                         </div>
                                         {handleRelease === undefined ? null : <Link to="/mypokemon/"><button className="btn release-btn" onClick={releasePokemon}>Release</button></Link>}
