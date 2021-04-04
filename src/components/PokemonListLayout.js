@@ -12,7 +12,7 @@ function PokemonListLayout({pokemonData, myPokemonCounter, handleGenerateRandomP
     return (
         <section>
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/poketch/">
                     <div className="pokemon-list">
                         <div className="grid grid-3-col">
                             {

@@ -88,7 +88,7 @@ function App() {
             <Router>
                 <Nav />
                 <Switch>
-                    <Route exact path="/">
+                    <Route exact path="/poketch/">
                         <PokemonListLayout 
                             pokemonData={pokemonList} 
                             myPokemonCounter={myPokemonCounter} 
@@ -100,7 +100,7 @@ function App() {
                             myPokemonCounter={myPokemonCounter} />               
                     </Route>
                     <Route exact path="/pokedex/">
-                        <Redirect to="/"/>              
+                        <Redirect to="/poketch/"/>              
                     </Route>
                     <Route path="/mypokemon/:index">
                         <PokemonInfo 
