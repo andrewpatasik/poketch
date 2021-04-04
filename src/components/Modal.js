@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 function Modal({ pokeIndex, handleAdd, modalProps, pokemonData }) {
 
@@ -17,12 +17,10 @@ function Modal({ pokeIndex, handleAdd, modalProps, pokemonData }) {
         if (takenStatus) {
             setIsTaken(true)
             setIsEmpty(false)
-            // alert("nickname is already taken")
             return
         } else if (nickname === "") {
             setIsEmpty(true)
             setIsTaken(false);
-            // alert("nickname cannot be empty")
             return
         }
 
