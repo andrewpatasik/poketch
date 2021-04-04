@@ -115,6 +115,9 @@ function App() {
                     </Route>
                 </Switch>
             </Router>
+            <div className="footer">
+                <a href="https://github.com/andrewpatasik" target="_blank">andrewpatasik.github.io</a>
+            </div>
         </div>
         );
 }

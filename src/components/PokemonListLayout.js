@@ -35,7 +35,7 @@ function PokemonListLayout({pokemonData, myPokemonCounter, handleGenerateRandomP
                                         <PokemonCard name={pokemon.nickname} myPokemonCounter={myPokemonCounter}/>
                                     </Link>
                         }) :
-                        <h1 className="centered">Hey it's empty, go catch some pokemon!</h1>
+                        <h1 className="empty-list centered">Hey it's empty, go catch some pokemon!</h1>
                         }
                     </div>              
                 </Route>
