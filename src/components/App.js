@@ -94,20 +94,20 @@ function App() {
                             myPokemonCounter={myPokemonCounter} 
                             handleGenerateRandomPokemon={handleGenerateRandomPokemon}/>               
                     </Route>
-                    <Route exact path="/poketch/mypokemon">
+                    <Route exact path="https://andrewpatasik.github.io/poketch/mypokemon">
                         <PokemonListLayout 
                             pokemonData={myPokemonList} 
                             myPokemonCounter={myPokemonCounter} />               
                     </Route>
-                    <Route exact path="/poketch/pokedex/">
+                    <Route exact path="https://andrewpatasik.github.io/poketch/pokedex/">
                         <Redirect to="/poketch/"/>              
                     </Route>
-                    <Route path="/poketch/mypokemon/:index">
+                    <Route path="https://andrewpatasik.github.io/poketch/mypokemon/:index">
                         <PokemonInfo 
                             pokemonData={myPokemonList} 
                             handleRelease={handleRelease}/>               
                     </Route>
-                    <Route path="/poketch/pokedex/:index">
+                    <Route path="https://andrewpatasik.github.io/poketch/pokedex/:index">
                         <PokemonInfo 
                             pokemonData={pokemonList} 
                             myPokemonData={myPokemonList} 
