@@ -12,12 +12,12 @@ function PokemonListLayout({pokemonData, myPokemonCounter, handleGenerateRandomP
     return (
         <section>
             <Switch>
-                <Route exact path="/poketch/">
+                <Route exact path="/">
                     <div className="pokemon-list">
                         <div className="grid grid-3-col">
                             {
                             pokemonData.map((pokemon, index) => {
-                                return <Link className="card-link" to={`/poketch/pokedex/${pokemon.id}`} key={index}>
+                                return <Link className="card-link" to={`pokedex/${pokemon.id}`} key={index}>
                                             <PokemonCard name={pokemon.name} id={pokemon.id} myPokemonCounter={myPokemonCounter} />
                                         </Link>
                             })
@@ -27,11 +27,11 @@ function PokemonListLayout({pokemonData, myPokemonCounter, handleGenerateRandomP
                         <button onClick={generateRandomPokemon} className="btn shuffle-btn">Shuffle</button>
                     </div>
                 </Route>
-                <Route path="/poketch/mypokemon">
+                <Route path="/mypokemon">
                     <div className="my-pokemon-list grid grid-3-col scrollable">
                         {
                         pokemonData.length !== 0 ? pokemonData.map((pokemon, index) => {
-                            return <Link className="card-link" to={`/poketch/mypokemon/${index}`} key={index}>
+                            return <Link className="card-link" to={`mypokemon/${index}`} key={index}>
                                         <PokemonCard name={pokemon.nickname} myPokemonCounter={myPokemonCounter}/>
                                     </Link>
                         }) :

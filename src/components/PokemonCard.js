@@ -18,13 +18,13 @@ function PokemonCard({name, id, myPokemonCounter}) {
 
     return (
         <Switch>
-            <Route exact path="/poketch/">
+            <Route exact path="/">
                 <div className="grid-item flex">
                     <h1 className="card-headline">{name}</h1>
                     <h3>Owned: {ownedPokemon[id]}</h3>
                 </div>
             </Route>            
-            <Route path="/poketch/mypokemon">
+            <Route path="/mypokemon">
                 <div className="grid-item flex">
                     <h1 className="card-headline">{name}</h1>
                 </div>

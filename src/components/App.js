@@ -88,26 +88,26 @@ function App() {
             <Router>
                 <Nav />
                 <Switch>
-                    <Route exact path="/poketch/">
+                    <Route exact path="/">
                         <PokemonListLayout 
                             pokemonData={pokemonList} 
                             myPokemonCounter={myPokemonCounter} 
                             handleGenerateRandomPokemon={handleGenerateRandomPokemon}/>               
                     </Route>
-                    <Route exact path="/poketch/mypokemon">
+                    <Route exact path="/mypokemon">
                         <PokemonListLayout 
                             pokemonData={myPokemonList} 
                             myPokemonCounter={myPokemonCounter} />               
                     </Route>
-                    <Route exact path="/poketch/pokedex/">
-                        <Redirect to="/poketch/"/>              
+                    <Route exact path="/pokedex/">
+                        <Redirect to="/"/>              
                     </Route>
-                    <Route path="/poketch/mypokemon/:index">
+                    <Route path="/mypokemon/:index">
                         <PokemonInfo 
                             pokemonData={myPokemonList} 
                             handleRelease={handleRelease}/>               
                     </Route>
-                    <Route path="/poketch/pokedex/:index">
+                    <Route path="/pokedex/:index">
                         <PokemonInfo 
                             pokemonData={pokemonList} 
                             myPokemonData={myPokemonList} 
@@ -116,7 +116,7 @@ function App() {
                 </Switch>
             </Router>
             <div className="footer">
-                <a href="https://github.com/andrewpatasik" target="_blank">andrewpatasik.github.io</a>
+                <a href="https://github.com/andrewpatasik/poketch" target="_blank">andrewpatasik.github.io</a>
             </div>
         </div>
         );
